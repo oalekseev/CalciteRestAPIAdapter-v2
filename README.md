@@ -22,6 +22,8 @@ Settings are provided via **OpenAPI specs for structure discovery** and **FreeMa
 **CalciteRestAPIAdapter** enables data retrieval from REST services using standard SQL syntax. It builds on the [Apache Calcite](https://calcite.apache.org/) framework, which allows the creation of adapters for diverse data sources through JDBC.
 Settings are provided via OpenAPI specs for structure discovery and FreeMarker templates for customizing HTTP requests. This allows seamless SQL-to-REST mapping with support for DNF/CNF filters and query pushdown.
 
+Proposal to contribute for community use is [here](https://lists.apache.org/thread/jvbpz7rp7w76gqmshtz3y6bhcftk41c5)
+Here is jira tiket [CALCITE-7300](https://issues.apache.org/jira/browse/CALCITE-7300)
 
 
 ***
