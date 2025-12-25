@@ -6,10 +6,10 @@ This is the **recommended version** with modern OpenAPI-based schema definition 
 
 ### Available Versions
 
-| Version | Configuration | Status | Repository |
-|---------|---------------|--------|------------|
-| **v1** | XML Files | Stable | [CalciteRestAPIAdapter](https://github.com/oalekseev/CalciteRestAPIAdapter) |
-| **v2** | OpenAPI Specs | Recommended | [CalciteRestAPIAdapter-v2](https://github.com/oalekseev/CalciteRestAPIAdapter-v2) |
+| Version | Configuration | Repository |
+|---------|---------------|------------|
+| **v1** | XML Files with FreeMarker templates  | [CalciteRestAPIAdapter](https://github.com/oalekseev/CalciteRestAPIAdapter) |
+| **v2** | OpenAPI Specs + FreeMarker templates | [CalciteRestAPIAdapter-v2](https://github.com/oalekseev/CalciteRestAPIAdapter-v2) |
 
 ### About v2
 
