@@ -15,12 +15,6 @@ This is the **recommended version** with modern OpenAPI-based schema definition 
 
 Settings are provided via **OpenAPI specs for structure discovery** and **FreeMarker templates for customizing HTTP requests**. This allows seamless SQL-to-REST mapping with support for DNF/CNF filters and query pushdown.
 
-### Migration from v1
-
-If you're currently using v1 with XML configuration, you can migrate to v2:
-
-**[CalciteRestAPIAdapter-v1](https://github.com/oalekseev/CalciteRestAPIAdapter)** → Legacy XML-based configuration (still supported)
-
 ---
 
 # CalciteRestAPIAdapter
