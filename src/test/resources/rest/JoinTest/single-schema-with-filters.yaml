@@ -1,0 +1,158 @@
+openapi: 3.0.0
+info:
+  title: Company API - Single Schema with Filters
+  description: Single schema with filter and projection support
+  version: "1.0"
+  x-calcite-restapi-schema-name: company_schema
+servers:
+  - url: http://localhost:8080
+paths:
+  /users:
+    post:
+      operationId: users
+      summary: Get users with filters and projections
+      x-calcite-restapi-table-name: users
+      x-calcite-restapi-request-body-template: users-with-filters-template.ftl
+      x-calcite-restapi-pagination:
+        pageStart: 1
+        pageSize: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                limit:
+                  type: integer
+                filters_dnf:
+                  type: array
+                  description: DNF filters (OR of AND groups)
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          enum: [id, name, lastName, age, department]
+                        operator:
+                          type: string
+                        value:
+                          oneOf:
+                            - type: string
+                            - type: integer
+                projections:
+                  type: array
+                  description: List of field names to return
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: User list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserList'
+  /departments:
+    post:
+      operationId: departments
+      summary: Get departments with filters and projections
+      x-calcite-restapi-table-name: departments
+      x-calcite-restapi-request-body-template: departments-with-filters-template.ftl
+      x-calcite-restapi-pagination:
+        pageStart: 1
+        pageSize: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                limit:
+                  type: integer
+                filters_dnf:
+                  type: array
+                  description: DNF filters (OR of AND groups)
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          enum: [id, name, location, budget]
+                        operator:
+                          type: string
+                        value:
+                          oneOf:
+                            - type: string
+                            - type: integer
+                projections:
+                  type: array
+                  description: List of field names to return
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Department list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepartmentList'
+components:
+  schemas:
+    UserList:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    User:
+      type: object
+      x-calcite-restapi-mappings:
+        id: id
+        name: name
+        lastName: last_name
+        age: age
+        department: department
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        lastName:
+          type: string
+        age:
+          type: integer
+        department:
+          type: string
+    DepartmentList:
+      type: object
+      properties:
+        departments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Department'
+    Department:
+      type: object
+      x-calcite-restapi-mappings:
+        id: id
+        name: name
+        location: location
+        budget: budget
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        location:
+          type: string
+        budget:
+          type: integer

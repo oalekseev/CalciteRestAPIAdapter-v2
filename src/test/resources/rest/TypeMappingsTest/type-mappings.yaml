@@ -1,0 +1,108 @@
+openapi: 3.0.0
+info:
+  title: SQL Type Mappings Test API
+  description: REST API to test explicit SQL type mappings
+  version: "1.0"
+  x-calcite-restapi-schema-name: type_mappings_schema
+servers:
+  - url: http://localhost:8080
+paths:
+  /products:
+    post:
+      operationId: products
+      summary: Get products with explicit SQL type mappings
+      x-calcite-restapi-table-name: products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                  description: Page number
+                limit:
+                  type: integer
+                  description: Number of items per page
+              additionalProperties: false
+      responses:
+        '200':
+          description: Product list with explicit SQL type mappings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+components:
+  schemas:
+    Product:
+      type: object
+      x-calcite-restapi-mappings:
+        id: product_id
+        name: product_name
+        price:
+          sqlName: product_price
+          sqlType: double
+        quantity:
+          sqlName: product_quantity
+          sqlType: int
+        created_at:
+          sqlName: created_timestamp
+          sqlType: timestamp
+        updated_at:
+          sqlName: updated_timestamp
+          sqlType: timestamp
+        is_active:
+          sqlName: is_active
+          sqlType: boolean
+        description: product_description
+        weight:
+          sqlName: product_weight
+          sqlType: float
+        category_id:
+          sqlName: category_id
+          sqlType: long
+        rating:
+          sqlName: product_rating
+          sqlType: float
+      properties:
+        id:
+          type: string
+          description: Product ID
+        name:
+          type: string
+          description: Product name
+        price:
+          type: string
+          description: Product price as string in JSON but DOUBLE in SQL
+        quantity:
+          type: integer
+          description: Product quantity
+        created_at:
+          type: string
+          format: date-time
+          description: Creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+        is_active:
+          type: boolean
+          description: Whether product is active
+        description:
+          type: string
+          description: Product description
+        weight:
+          type: number
+          description: Product weight
+        category_id:
+          type: integer
+          description: Category ID
+        rating:
+          type: number
+          description: Product rating

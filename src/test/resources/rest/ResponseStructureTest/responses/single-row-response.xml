@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<item>
+  <id>50</id>
+  <name>Standalone Item</name>
+  <description>This is a standalone item in a single object response</description>
+  <status>active</status>
+</item>

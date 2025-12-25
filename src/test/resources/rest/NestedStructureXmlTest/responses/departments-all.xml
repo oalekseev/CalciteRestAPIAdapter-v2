@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<departments>
+  <department>
+    <department_id>1</department_id>
+    <department_name>IT</department_name>
+    <employees>
+      <employee>
+        <employee_id>101</employee_id>
+        <employee_name>Alice</employee_name>
+        <tasks>
+          <task>
+            <task_id>1001</task_id>
+            <task_title>Fix bug</task_title>
+          </task>
+        </tasks>
+      </employee>
+    </employees>
+  </department>
+</departments>

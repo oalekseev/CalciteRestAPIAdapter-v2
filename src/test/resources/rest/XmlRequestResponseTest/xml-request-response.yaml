@@ -1,0 +1,91 @@
+openapi: 3.0.0
+info:
+  title: BookAPI - XML Request and Response with Headers
+  description: REST API with XML request and response format and dynamic headers
+  version: "1.0"
+  x-calcite-restapi-schema-name: books_schema
+servers:
+  - url: http://localhost:8080
+paths:
+  /books-xml:
+    post:
+      operationId: books_xml
+      summary: Get books with XML request body and response, with dynamic headers
+      x-calcite-restapi-table-name: books
+      x-calcite-restapi-request-body-template: body-xml-template.ftl
+      x-calcite-restapi-request-headers-template: headers-template.ftl
+      x-calcite-restapi-pagination:
+        pageStart: 1
+        pageSize: 100
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/BookRequest'
+      responses:
+        '200':
+          description: Book list in XML format
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/BookList'
+components:
+  schemas:
+    BookRequest:
+      type: object
+      properties:
+        page:
+          type: integer
+          description: Page number
+        limit:
+          type: integer
+          description: Number of items per page
+        filters:
+          type: array
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/FilterCriterion'
+          description: DNF-style filters (OR of ANDs)
+      additionalProperties: false
+    FilterCriterion:
+      type: object
+      properties:
+        name:
+          type: string
+          enum: [ title, author, year, genre ]
+        operator:
+          type: string
+          enum: [ "=", ">=", "<=", ">", "<", "!=" ]
+        value:
+          oneOf:
+            - type: string
+            - type: integer
+      required: [ name, operator, value ]
+    BookList:
+      type: object
+      properties:
+        books:
+          type: array
+          items:
+            $ref: '#/components/schemas/Book'
+    Book:
+      type: object
+      x-calcite-restapi-mappings:
+        id: book_id
+        title: book_title
+        author: book_author
+        year: book_year
+        genre: book_genre
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        author:
+          type: string
+        year:
+          type: integer
+        genre:
+          type: string

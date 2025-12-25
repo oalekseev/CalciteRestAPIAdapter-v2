@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BookList>
+    <books>
+        <id>3</id>
+        <title>To Kill a Mockingbird</title>
+        <author>Harper Lee</author>
+        <year>1960</year>
+        <genre>Fiction</genre>
+    </books>
+    <books>
+        <id>5</id>
+        <title>The Catcher in the Rye</title>
+        <author>J.D. Salinger</author>
+        <year>1951</year>
+        <genre>Fiction</genre>
+    </books>
+</BookList>

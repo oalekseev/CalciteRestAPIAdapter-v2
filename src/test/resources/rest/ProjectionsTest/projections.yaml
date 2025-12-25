@@ -1,0 +1,96 @@
+openapi: 3.0.0
+info:
+  title: UserAPI - Projection Support
+  description: REST API with projection support (SELECT specific columns)
+  version: "1.0"
+  x-calcite-restapi-schema-name: users_schema
+servers:
+  - url: http://localhost:8080
+paths:
+  /users:
+    post:
+      operationId: users
+      summary: Get users with projection and filter support
+      x-calcite-restapi-table-name: users
+      x-calcite-restapi-request-body-template: body-projections-json-template.ftl
+      x-calcite-restapi-pagination:
+        pageStart: 1
+        pageSize: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                  description: Page number
+                limit:
+                  type: integer
+                  description: Number of items per page
+                projections:
+                  type: object
+                  description: Map of SQL column names to REST field names for projection
+                  additionalProperties:
+                    type: string
+                  example:
+                    name: name
+                    last_name: lastName
+                filters:
+                  type: array
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FilterCriterion'
+                  description: DNF-style filters (OR of ANDs)
+              additionalProperties: false
+      responses:
+        '200':
+          description: User list with only projected fields
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserList'
+components:
+  schemas:
+    FilterCriterion:
+      type: object
+      properties:
+        name:
+          type: string
+          enum: [ name, lastName, age, department ]
+        operator:
+          type: string
+          enum: [ "=", ">=", "<=", ">", "<", "!=" ]
+        value:
+          oneOf:
+            - type: string
+            - type: integer
+      required: [ name, operator, value ]
+    UserList:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    User:
+      type: object
+      x-calcite-restapi-mappings:
+        id: id
+        name: name
+        lastName: last_name
+        age: age
+        department: department
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        lastName:
+          type: string
+        age:
+          type: integer
+        department:
+          type: string

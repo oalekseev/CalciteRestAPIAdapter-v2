@@ -1,0 +1,30 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Laptop",
+      "price": "999.99",
+      "quantity": 10,
+      "created_at": "2023-01-15T10:30:00Z",
+      "updated_at": "2023-01-15T10:30:00Z",
+      "is_active": true,
+      "description": "High-performance laptop",
+      "weight": 2.5,
+      "category_id": 1,
+      "rating": 4.5
+    },
+    {
+      "id": "2",
+      "name": "Mouse",
+      "price": "25.99",
+      "quantity": 50,
+      "created_at": "2023-01-16T11:45:00Z",
+      "updated_at": "2023-01-16T11:45:00Z",
+      "is_active": true,
+      "description": "Wireless mouse",
+      "weight": 0.1,
+      "category_id": 2,
+      "rating": 4.2
+    }
+  ]
+}

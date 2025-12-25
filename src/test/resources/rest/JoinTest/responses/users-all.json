@@ -1,0 +1,60 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Alice",
+      "lastName": "Johnson",
+      "age": 30,
+      "department": "IT"
+    },
+    {
+      "id": 2,
+      "name": "Bob",
+      "lastName": "Smith",
+      "age": 25,
+      "department": "IT"
+    },
+    {
+      "id": 3,
+      "name": "Carol",
+      "lastName": "Williams",
+      "age": 35,
+      "department": "HR"
+    },
+    {
+      "id": 4,
+      "name": "David",
+      "lastName": "Brown",
+      "age": 28,
+      "department": "HR"
+    },
+    {
+      "id": 5,
+      "name": "Eve",
+      "lastName": "Davis",
+      "age": 32,
+      "department": "Sales"
+    },
+    {
+      "id": 6,
+      "name": "Frank",
+      "lastName": "Miller",
+      "age": 29,
+      "department": "Sales"
+    },
+    {
+      "id": 7,
+      "name": "Grace",
+      "lastName": "Wilson",
+      "age": 27,
+      "department": "Marketing"
+    },
+    {
+      "id": 8,
+      "name": "Henry",
+      "lastName": "Moore",
+      "age": 31,
+      "department": "Finance"
+    }
+  ]
+}

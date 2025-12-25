@@ -1,0 +1,130 @@
+openapi: 3.0.0
+info:
+  title: Multi-table API for JOIN test
+  description: API with users and departments for JOIN testing
+  version: "1.0"
+  x-calcite-restapi-schema-name: users_schema
+servers:
+  - url: http://localhost:8080
+
+paths:
+  /users:
+    post:
+      operationId: users
+      summary: Get users
+      x-calcite-restapi-table-name: users
+      x-calcite-restapi-request-body-template: variant1-body-json-template.ftl
+      x-calcite-restapi-pagination:
+        pageStart: 1
+        pageSize: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                limit:
+                  type: integer
+                name:
+                  type: string
+                lastName:
+                  type: string
+                age:
+                  type: integer
+                department:
+                  type: string
+              additionalProperties: false
+      responses:
+        '200':
+          description: User list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserList'
+
+  /departments:
+    post:
+      operationId: departments
+      summary: Get departments
+      x-calcite-restapi-table-name: departments
+      x-calcite-restapi-request-body-template: departments-body-template.ftl
+      x-calcite-restapi-pagination:
+        pageStart: 1
+        pageSize: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                limit:
+                  type: integer
+                name:
+                  type: string
+              additionalProperties: false
+      responses:
+        '200':
+          description: Department list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepartmentList'
+
+components:
+  schemas:
+    UserList:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    User:
+      type: object
+      x-calcite-restapi-mappings:
+        id: id
+        name: name
+        lastName: last_name
+        age: age
+        department: department
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        lastName:
+          type: string
+        age:
+          type: integer
+        department:
+          type: string
+
+    DepartmentList:
+      type: object
+      properties:
+        departments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Department'
+    Department:
+      type: object
+      x-calcite-restapi-mappings:
+        id: id
+        name: name
+        location: location
+        budget: budget
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        location:
+          type: string
+        budget:
+          type: integer

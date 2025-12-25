@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Bob",
+      "lastName": "Smith",
+      "age": 25,
+      "department": "IT"
+    },
+    {
+      "id": 4,
+      "name": "Martin",
+      "lastName": "Smith",
+      "age": 35,
+      "department": "Sales"
+    },
+    {
+      "id": 5,
+      "name": "Alice",
+      "lastName": "Smith",
+      "age": 28,
+      "department": "IT"
+    },
+    {
+      "id": 7,
+      "name": "Sarah",
+      "lastName": "Smith",
+      "age": 26,
+      "department": "IT"
+    }
+  ]
+}

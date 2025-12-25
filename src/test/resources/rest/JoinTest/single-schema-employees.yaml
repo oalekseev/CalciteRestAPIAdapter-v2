@@ -1,0 +1,64 @@
+openapi: 3.0.0
+info:
+  title: Employees API
+  description: Employees service with company_schema
+  version: "1.0"
+  x-calcite-restapi-schema-name: company_schema
+servers:
+  - url: http://localhost:8080
+paths:
+  /employees:
+    post:
+      operationId: employees
+      summary: Get employees
+      x-calcite-restapi-table-name: employees
+      x-calcite-restapi-request-body-template: single-schema-employees-template.ftl
+      x-calcite-restapi-pagination:
+        pageStart: 1
+        pageSize: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                limit:
+                  type: integer
+      responses:
+        '200':
+          description: Employee list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserList'
+components:
+  schemas:
+    UserList:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    User:
+      type: object
+      x-calcite-restapi-mappings:
+        id: id
+        name: name
+        lastName: last_name
+        age: age
+        department: department
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        lastName:
+          type: string
+        age:
+          type: integer
+        department:
+          type: string

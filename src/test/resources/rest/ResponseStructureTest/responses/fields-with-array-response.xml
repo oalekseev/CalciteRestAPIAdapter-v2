@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<response>
+  <response_id>12345</response_id>
+  <response_timestamp>2023-12-20T10:00:00Z</response_timestamp>
+  <response_source>product_catalog_api</response_source>
+  <categories>
+    <category>
+      <category_id>1</category_id>
+      <category_name>Electronics</category_name>
+      <items>
+        <item>
+          <id>101</id>
+          <name>Laptop</name>
+          <price>999.99</price>
+        </item>
+        <item>
+          <id>102</id>
+          <name>Mouse</name>
+          <price>25.99</price>
+        </item>
+      </items>
+    </category>
+    <category>
+      <category_id>2</category_id>
+      <category_name>Books</category_name>
+      <items>
+        <item>
+          <id>201</id>
+          <name>Java Guide</name>
+          <price>49.99</price>
+        </item>
+        <item>
+          <id>202</id>
+          <name>Python Basics</name>
+          <price>39.99</price>
+        </item>
+      </items>
+    </category>
+  </categories>
+</response>

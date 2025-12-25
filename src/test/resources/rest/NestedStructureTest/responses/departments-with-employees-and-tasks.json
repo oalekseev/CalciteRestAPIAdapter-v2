@@ -1,0 +1,49 @@
+{
+  "departments": [
+    {
+      "id": 1,
+      "name": "IT",
+      "location": "Building A",
+      "budget": 500000,
+      "employees": [
+        {
+          "id": 101,
+          "name": "Alice",
+          "position": "Developer",
+          "salary": 80000,
+          "tasks": [
+            {"id": 1001, "title": "Fix bug #123", "status": "In Progress", "priority": 1},
+            {"id": 1002, "title": "Code review", "status": "Completed", "priority": 2}
+          ]
+        },
+        {
+          "id": 102,
+          "name": "Bob",
+          "position": "Senior Developer",
+          "salary": 95000,
+          "tasks": [
+            {"id": 1003, "title": "Design API", "status": "In Progress", "priority": 1},
+            {"id": 1004, "title": "Write tests", "status": "Pending", "priority": 3}
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "HR",
+      "location": "Building B",
+      "budget": 200000,
+      "employees": [
+        {
+          "id": 201,
+          "name": "Carol",
+          "position": "HR Manager",
+          "salary": 70000,
+          "tasks": [
+            {"id": 2001, "title": "Interview candidates", "status": "In Progress", "priority": 1}
+          ]
+        }
+      ]
+    }
+  ]
+}

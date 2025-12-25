@@ -1,0 +1,61 @@
+openapi: 3.0.0
+info:
+  title: UserAPI with Pagination
+  version: "1.0"
+  x-calcite-restapi-schema-name: users_schema
+servers:
+  - url: http://localhost:8080
+paths:
+  /users:
+    post:
+      operationId: users
+      summary: Get users with pagination (pageSize=2)
+      x-calcite-restapi-table-name: users
+      x-calcite-restapi-request-body-template: body-pagination-json-template.ftl
+      x-calcite-restapi-pagination:
+        pageStart: 1
+        pageSize: 2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                limit:
+                  type: integer
+              additionalProperties: false
+      responses:
+        '200':
+          description: User list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserList'
+components:
+  schemas:
+    UserList:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    User:
+      type: object
+      x-calcite-restapi-mappings:
+        id: id
+        name: name
+        age: age
+        department: department
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        age:
+          type: integer
+        department:
+          type: string

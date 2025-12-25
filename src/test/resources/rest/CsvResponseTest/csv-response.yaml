@@ -1,0 +1,85 @@
+openapi: 3.0.0
+info:
+  title: UsersAPI_CSV
+  version: "1.0"
+  x-calcite-restapi-schema-name: users_schema
+servers:
+  - url: http://localhost:8080
+paths:
+  /users:
+    post:
+      operationId: users_csv
+      summary: Get users in CSV format
+      x-calcite-restapi-table-name: users
+      x-calcite-restapi-request-body-template: body-json-template.ftl
+      x-calcite-restapi-pagination:
+        pageStart: 0
+        pageSize: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                limit:
+                  type: integer
+                where:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FilterCriterion'
+                  description: List of AND filter criteria
+                or:
+                  type: array
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FilterCriterion'
+                  description: DNF - List of OR groups
+              additionalProperties: false
+      responses:
+        '200':
+          description: User list in CSV format (first row is header, subsequent rows are data)
+          content:
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+components:
+  schemas:
+    FilterCriterion:
+      type: object
+      properties:
+        name:
+          type: string
+          enum: [ id, name, lastName, age, department ]
+        operator:
+          type: string
+          enum: [ "=", ">=", ">", "<", "<=", "!=", "<>" ]
+        value:
+          oneOf:
+            - type: string
+            - type: integer
+      required: [ name, operator, value ]
+    User:
+      type: object
+      x-calcite-restapi-mappings:
+        id: id
+        name: name
+        lastName: last_name
+        age: age
+        department: department
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        lastName:
+          type: string
+        age:
+          type: integer
+        department:
+          type: string

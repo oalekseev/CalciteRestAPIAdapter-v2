@@ -1,0 +1,28 @@
+{
+  "departments": [
+    {
+      "id": 1,
+      "name": "IT",
+      "location": "Building A",
+      "budget": 500000
+    },
+    {
+      "id": 3,
+      "name": "Sales",
+      "location": "Building C",
+      "budget": 300000
+    },
+    {
+      "id": 4,
+      "name": "Marketing",
+      "location": "Building D",
+      "budget": 250000
+    },
+    {
+      "id": 5,
+      "name": "Finance",
+      "location": "Building E",
+      "budget": 400000
+    }
+  ]
+}

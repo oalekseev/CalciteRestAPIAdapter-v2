@@ -1,0 +1,6 @@
+{
+  "id": 50,
+  "name": "Standalone Item",
+  "description": "This is a standalone item in a single object response",
+  "status": "active"
+}

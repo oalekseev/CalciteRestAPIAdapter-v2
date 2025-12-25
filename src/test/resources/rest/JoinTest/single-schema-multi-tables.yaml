@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Company API - Single Schema
+  description: Single schema with multiple tables (employees and departments)
+  version: "1.0"
+  x-calcite-restapi-schema-name: company_schema
+servers:
+  - url: http://localhost:8080
+paths:
+  /users:
+    post:
+      operationId: users
+      summary: Get users
+      x-calcite-restapi-table-name: users
+      x-calcite-restapi-request-body-template: single-schema-users-template.ftl
+      x-calcite-restapi-pagination:
+        pageStart: 1
+        pageSize: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                limit:
+                  type: integer
+      responses:
+        '200':
+          description: User list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserList'
+  /departments:
+    post:
+      operationId: departments
+      summary: Get departments
+      x-calcite-restapi-table-name: departments
+      x-calcite-restapi-request-body-template: single-schema-departments-template.ftl
+      x-calcite-restapi-pagination:
+        pageStart: 1
+        pageSize: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                limit:
+                  type: integer
+      responses:
+        '200':
+          description: Department list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepartmentList'
+components:
+  schemas:
+    UserList:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    User:
+      type: object
+      x-calcite-restapi-mappings:
+        id: id
+        name: name
+        lastName: last_name
+        age: age
+        department: department
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        lastName:
+          type: string
+        age:
+          type: integer
+        department:
+          type: string
+    DepartmentList:
+      type: object
+      properties:
+        departments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Department'
+    Department:
+      type: object
+      x-calcite-restapi-mappings:
+        id: id
+        name: name
+        location: location
+        budget: budget
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        location:
+          type: string
+        budget:
+          type: integer

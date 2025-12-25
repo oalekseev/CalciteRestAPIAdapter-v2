@@ -1,0 +1,39 @@
+{
+  "response_id": 12345,
+  "response_timestamp": "2023-12-20T10:00:00Z",
+  "response_source": "product_catalog_api",
+  "categories": [
+    {
+      "category_id": 1,
+      "category_name": "Electronics",
+      "items": [
+        {
+          "id": 101,
+          "name": "Laptop",
+          "price": 999.99
+        },
+        {
+          "id": 102,
+          "name": "Mouse",
+          "price": 25.99
+        }
+      ]
+    },
+    {
+      "category_id": 2,
+      "category_name": "Books",
+      "items": [
+        {
+          "id": 201,
+          "name": "Java Guide",
+          "price": 49.99
+        },
+        {
+          "id": 202,
+          "name": "Python Basics",
+          "price": 39.99
+        }
+      ]
+    }
+  ]
+}

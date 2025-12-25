@@ -1,0 +1,25 @@
+{
+  "companies": [
+    {
+      "id": 1,
+      "name": "TechCorp",
+      "industry": "Technology",
+      "revenue": 5000000.0,
+      "employees": 50
+    },
+    {
+      "id": 2,
+      "name": "MegaRetail",
+      "industry": "Retail",
+      "revenue": 12000000.0,
+      "employees": 120
+    },
+    {
+      "id": 3,
+      "name": "FinanceGroup",
+      "industry": "Finance",
+      "revenue": 3500000.0,
+      "employees": 35
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+openapi: 3.0.0
+info:
+  title: UserAPI - URL Template Support
+  description: REST API with URL template support for filters, projections and pagination
+  version: "1.0"
+  x-calcite-restapi-schema-name: users_schema
+servers:
+  - url: http://localhost:8080
+paths:
+  /users:
+    get:
+      operationId: users
+      summary: Get users with URL query parameters for filters and pagination
+      x-calcite-restapi-table-name: users
+      x-calcite-restapi-request-url-template: url-template.ftl
+      x-calcite-restapi-request-headers-template: headers-template.ftl
+      x-calcite-restapi-pagination:
+        pageStart: 1
+        pageSize: 100
+      parameters:
+        - name: name
+          in: query
+          description: Filter by name (exact match only)
+          required: false
+          schema:
+            type: string
+        - name: lastName
+          in: query
+          description: Filter by last name (exact match only)
+          required: false
+          schema:
+            type: string
+        - name: age
+          in: query
+          description: Filter by age (exact match only)
+          required: false
+          schema:
+            type: integer
+        - name: department
+          in: query
+          description: Filter by department (exact match only)
+          required: false
+          schema:
+            type: string
+        - name: offset
+          in: query
+          description: Pagination offset
+          required: false
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: Number of items per page
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: User list with URL template support
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserList'
+components:
+  schemas:
+    UserList:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    User:
+      type: object
+      x-calcite-restapi-mappings:
+        id: id
+        name: name
+        lastName: last_name
+        age: age
+        department: department
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        lastName:
+          type: string
+        age:
+          type: integer
+        department:
+          type: string

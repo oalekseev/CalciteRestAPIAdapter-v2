@@ -1,0 +1,87 @@
+openapi: 3.0.0
+info:
+  title: UserAPI - Variant 1
+  description: Simple flat filters (no DNF/CNF support)
+  version: "1.0"
+  x-calcite-restapi-schema-name: users_schema
+servers:
+  - url: http://localhost:8080
+paths:
+  /users:
+    post:
+      operationId: users
+      summary: Get users with simple flat filters
+      x-calcite-restapi-table-name: users
+      x-calcite-restapi-request-body-template: variant1-body-json-template.ftl
+      x-calcite-restapi-pagination:
+        pageStart: 1
+        pageSize: 100
+      # Explicitly define filterable fields (for POST with JSON body)
+      x-calcite-restapi-filterable-fields:
+        - name: name
+          type: string
+        - name: lastName
+          type: string
+        - name: age
+          type: integer
+        - name: department
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                limit:
+                  type: integer
+                name:
+                  type: string
+                  description: Filter by name (exact match only)
+                lastName:
+                  type: string
+                  description: Filter by lastName (exact match only)
+                age:
+                  type: integer
+                  description: Filter by age (exact match only)
+                department:
+                  type: string
+                  description: Filter by department (exact match only)
+              additionalProperties: false
+      responses:
+        '200':
+          description: User list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserList'
+components:
+  schemas:
+    UserList:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    User:
+      type: object
+      x-calcite-restapi-mappings:
+        id: id
+        name: name
+        lastName: last_name
+        age: age
+        department: department
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        lastName:
+          type: string
+        age:
+          type: integer
+        department:
+          type: string

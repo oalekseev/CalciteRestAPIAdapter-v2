@@ -1,0 +1,162 @@
+openapi: 3.0.0
+info:
+  title: JSON Response Structure Test API
+  version: "1.0"
+  x-calcite-restapi-schema-name: anonymous_array_schema
+servers:
+  - url: http://localhost:8080
+paths:
+  /data:
+    post:
+      operationId: data
+      x-calcite-restapi-table-name: data
+      x-calcite-restapi-schema-name: anonymous_array_schema
+      summary: Get anonymous JSON array data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                limit:
+                  type: integer
+              additionalProperties: true
+      responses:
+        '200':
+          description: Anonymous JSON array response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+  /single:
+    post:
+      operationId: single
+      x-calcite-restapi-table-name: single
+      x-calcite-restapi-schema-name: single_row_schema
+      summary: Get single row data (object response)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                limit:
+                  type: integer
+              additionalProperties: true
+      responses:
+        '200':
+          description: Single object response (treated as single row table)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SingleItem'
+  /complex:
+    post:
+      operationId: complex
+      x-calcite-restapi-table-name: complex
+      x-calcite-restapi-schema-name: fields_array_schema
+      summary: Get data with fields and nested array
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                limit:
+                  type: integer
+              additionalProperties: true
+      responses:
+        '200':
+          description: Data with fields and nested array
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryList'
+components:
+  schemas:
+    Item:
+      type: object
+      x-calcite-restapi-mappings:
+        id: id
+        name: name
+        item_value: item_value
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        item_value:
+          type: string
+    SingleItem:
+      type: object
+      x-calcite-restapi-mappings:
+        id: id
+        name: name
+        description: description
+        status: status
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+    Category:
+      type: object
+      x-calcite-restapi-mappings:
+        category_id: category_id
+        category_name: category_name
+      properties:
+        category_id:
+          type: integer
+        category_name:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemInCategory'
+    CategoryList:
+      type: object
+      x-calcite-restapi-mappings:
+        response_id: response_id
+        response_timestamp: response_timestamp
+        response_source: response_source
+      properties:
+        response_id:
+          type: integer
+        response_timestamp:
+          type: string
+          format: date-time
+        response_source:
+          type: string
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+    ItemInCategory:
+      type: object
+      x-calcite-restapi-mappings:
+        id: item_id
+        name: item_name
+        price: item_price
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        price:
+          type: number
+          format: double

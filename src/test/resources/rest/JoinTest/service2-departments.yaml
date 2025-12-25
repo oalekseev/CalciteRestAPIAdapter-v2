@@ -1,0 +1,61 @@
+openapi: 3.0.0
+info:
+  title: Service 2 - Department Management
+  description: Department service REST API
+  version: "1.0"
+  x-calcite-restapi-schema-name: service2_schema
+servers:
+  - url: http://localhost:8080
+paths:
+  /departments:
+    post:
+      operationId: departments
+      summary: Get departments
+      x-calcite-restapi-table-name: departments
+      x-calcite-restapi-request-body-template: service2-departments-template.ftl
+      x-calcite-restapi-pagination:
+        pageStart: 1
+        pageSize: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                limit:
+                  type: integer
+      responses:
+        '200':
+          description: Department list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepartmentList'
+components:
+  schemas:
+    DepartmentList:
+      type: object
+      properties:
+        departments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Department'
+    Department:
+      type: object
+      x-calcite-restapi-mappings:
+        id: department_id
+        name: department_name
+        location: department_location
+        budget: department_budget
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        location:
+          type: string
+        budget:
+          type: integer

@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "id": 4,
+      "name": "Martin",
+      "lastName": "Smith",
+      "age": 35,
+      "department": "Sales"
+    },
+    {
+      "id": 6,
+      "name": "John",
+      "lastName": "Doe",
+      "age": 30,
+      "department": "HR"
+    }
+  ]
+}

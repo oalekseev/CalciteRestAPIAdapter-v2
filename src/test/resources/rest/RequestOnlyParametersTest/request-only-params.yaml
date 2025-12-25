@@ -1,0 +1,76 @@
+openapi: 3.0.0
+info:
+  title: CompanyAPI - REQUEST-only Parameters Test
+  description: REST API to test REQUEST-only parameters (input param rating not returned in response)
+  version: "1.0"
+  x-calcite-restapi-schema-name: company_schema
+servers:
+  - url: http://localhost:8080
+paths:
+  /companies:
+    post:
+      operationId: companies
+      summary: Get companies by rating
+      x-calcite-restapi-table-name: companies
+      x-calcite-restapi-request-body-template: company-search-template.ftl
+      x-calcite-restapi-pagination:
+        pageStart: 1
+        pageSize: 100
+      # Filterable field for POST with JSON body (REQUEST-only - not in response)
+      x-calcite-restapi-filterable-fields:
+        - name: rating
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                  description: Page number
+                limit:
+                  type: integer
+                  description: Number of items per page
+                rating:
+                  type: integer
+                  description: rating 1-10
+              additionalProperties: false
+      responses:
+        '200':
+          description: Company information by rating
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyList'
+components:
+  schemas:
+    CompanyList:
+      type: object
+      properties:
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Company'
+    Company:
+      type: object
+      x-calcite-restapi-mappings:
+        id: id
+        name: name
+        industry: industry
+        revenue: revenue
+        employees: employee_count
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        industry:
+          type: string
+        revenue:
+          type: number
+          format: double
+        employees:
+          type: integer
+
