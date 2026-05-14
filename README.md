@@ -3573,4 +3573,4 @@ If you have questions about this project or need help with configuration, feel f
 
 - Oleg Alekseev
 - Telegram: [@oalekseevdev](https://t.me/oalekseevdev)
-- E-mail: [o_alekseev@mail.ru](mailto:o_alekseev@mail.ru)
+- E-mail: [oalekseevdev@gmail.com](mailto:oalekseevdev@gmail.com)
